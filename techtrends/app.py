@@ -65,6 +65,20 @@ def create():
 
     return render_template('create.html')
 
+
+# Define endpoint for healthy
+@app.route("/healthy")
+def healthy():
+    try:
+        connection = get_db_connection()
+        connection.cursor()
+        connection.execute("SELECT * FROM posts LIMIT 1")
+        connection.close()
+        return {"SUCCESS": "The application is Healthy and it is up and running !!! "}
+    except Exception:
+        return {"ERROR": "The application is unhealthy, please contact administrator !!!"}, 500
+
+
 # start the application on port 3111
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port='3111')
