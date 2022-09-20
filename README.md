@@ -1,2 +1,2 @@
 # UdacityAssignement
-assignment from Udacity training.
+assignment from Udacity.
