@@ -1,11 +1,72 @@
 ## Docker commands used to build the application 
-# TODO: insert the docker build command
+docker build -t techtrends .
 
 ## Docker commands used to run the application
-# TODO: insert the docker run command
+ docker run -d -p 7111:3111 techtrends
 
 ## Docker commands used to get the application logs
-# TODO: insert the docker logs command
+ docker logs 595b30f07b0c8cb862d9568ade5d56894f13514c724850a437acf77153b31394
 
 ## Logs from the container running the TechTrends application
-# TODO: paste logs from the Docker container 
+ docker logs 595b30f07b0c8cb862d9568ade5d56894f13514c724850a437acf77153b31394
+ * Serving Flask app 'app' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+WARNING:werkzeug:2022-09-20 05:19:01,433,  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug:2022-09-20 05:19:01,433,  * Running on http://172.17.0.3:3111/ (Press CTRL+C to quit)
+INFO:root:2022-09-20 05:19:53,971, successfully connected to DB !!!
+INFO:werkzeug:2022-09-20 05:19:53,977, 172.17.0.1 - - [20/Sep/2022 05:19:53] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:2022-09-20 05:19:53,991, 172.17.0.1 - - [20/Sep/2022 05:19:53] "GET /static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:2022-09-20 05:19:54,031, 172.17.0.1 - - [20/Sep/2022 05:19:54] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:root:2022-09-20 05:42:24,119, successfully connected to DB !!!
+INFO:werkzeug:2022-09-20 05:42:24,119, 172.17.0.1 - - [20/Sep/2022 05:42:24] "GET /healthz HTTP/1.1" 200 -
+INFO:root:2022-09-20 05:42:31,615, successfully connected to DB !!!
+INFO:werkzeug:2022-09-20 05:42:31,616, 172.17.0.1 - - [20/Sep/2022 05:42:31] "GET /metrics HTTP/1.1" 200 -
+INFO:root:2022-09-20 05:42:57,231, successfully connected to DB !!!
+INFO:werkzeug:2022-09-20 05:42:57,232, 172.17.0.1 - - [20/Sep/2022 05:42:57] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:2022-09-20 05:42:57,482, 172.17.0.1 - - [20/Sep/2022 05:42:57] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:werkzeug:2022-09-20 05:43:39,497, 172.17.0.1 - - [20/Sep/2022 05:43:39] "GET /he HTTP/1.1" 404 -
+INFO:root:2022-09-20 05:43:45,125, successfully connected to DB !!!
+INFO:werkzeug:2022-09-20 05:43:45,126, 172.17.0.1 - - [20/Sep/2022 05:43:45] "GET /healthz HTTP/1.1" 200 -
+INFO:root:2022-09-20 05:44:00,622, successfully connected to DB !!!
+INFO:werkzeug:2022-09-20 05:44:00,623, 172.17.0.1 - - [20/Sep/2022 05:44:00] "GET /metrics HTTP/1.1" 200 -
+INFO:root:2022-09-20 05:46:42,569, successfully connected to DB !!!
+INFO:werkzeug:2022-09-20 05:46:42,570, 172.17.0.1 - - [20/Sep/2022 05:46:42] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:2022-09-20 05:46:42,581, 172.17.0.1 - - [20/Sep/2022 05:46:42] "GET /static/css/main.css HTTP/1.1" 304 -
+DEBUG:root:2022-09-20 05:46:45,469, The 'About Us' page is retrieved
+INFO:werkzeug:2022-09-20 05:46:45,471, 172.17.0.1 - - [20/Sep/2022 05:46:45] "GET /about HTTP/1.1" 200 -
+INFO:werkzeug:2022-09-20 05:46:45,776, 172.17.0.1 - - [20/Sep/2022 05:46:45] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:root:2022-09-20 05:46:47,870, successfully connected to DB !!!
+INFO:werkzeug:2022-09-20 05:46:47,872, 172.17.0.1 - - [20/Sep/2022 05:46:47] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:2022-09-20 05:46:47,886, 172.17.0.1 - - [20/Sep/2022 05:46:47] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:werkzeug:2022-09-20 05:46:49,265, 172.17.0.1 - - [20/Sep/2022 05:46:49] "GET /create HTTP/1.1" 200 -
+INFO:werkzeug:2022-09-20 05:46:49,500, 172.17.0.1 - - [20/Sep/2022 05:46:49] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:root:2022-09-20 05:47:16,934, successfully connected to DB !!!
+DEBUG:root:2022-09-20 05:47:16,945, New Article with title  Udemy nano  Certificate created!
+INFO:werkzeug:2022-09-20 05:47:16,946, 172.17.0.1 - - [20/Sep/2022 05:47:16] "POST /create HTTP/1.1" 302 -
+INFO:root:2022-09-20 05:47:16,949, successfully connected to DB !!!
+INFO:werkzeug:2022-09-20 05:47:16,950, 172.17.0.1 - - [20/Sep/2022 05:47:16] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:2022-09-20 05:47:16,964, 172.17.0.1 - - [20/Sep/2022 05:47:16] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:root:2022-09-20 05:47:19,105, successfully connected to DB !!!
+INFO:root:2022-09-20 05:47:19,105, A new article is created
+DEBUG:root:2022-09-20 05:47:19,105, Article with title : Udemy nano  Certificate retrieved!
+INFO:werkzeug:2022-09-20 05:47:19,107, 172.17.0.1 - - [20/Sep/2022 05:47:19] "GET /7 HTTP/1.1" 200 -
+INFO:werkzeug:2022-09-20 05:47:19,329, 172.17.0.1 - - [20/Sep/2022 05:47:19] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:root:2022-09-20 05:47:21,932, successfully connected to DB !!!
+ERROR:root:2022-09-20 05:47:21,932, Article does not present in DB!
+INFO:werkzeug:2022-09-20 05:47:21,934, 172.17.0.1 - - [20/Sep/2022 05:47:21] "GET /8 HTTP/1.1" 404 -
+INFO:werkzeug:2022-09-20 05:47:22,136, 172.17.0.1 - - [20/Sep/2022 05:47:22] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:root:2022-09-20 05:47:23,757, successfully connected to DB !!!
+INFO:werkzeug:2022-09-20 05:47:23,758, 172.17.0.1 - - [20/Sep/2022 05:47:23] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:2022-09-20 05:47:23,766, 172.17.0.1 - - [20/Sep/2022 05:47:23] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:root:2022-09-20 05:47:26,668, successfully connected to DB !!!
+INFO:root:2022-09-20 05:47:26,668, A new article is created
+DEBUG:root:2022-09-20 05:47:26,668, Article with title : Kubernetes Certification retrieved!
+INFO:werkzeug:2022-09-20 05:47:26,668, 172.17.0.1 - - [20/Sep/2022 05:47:26] "GET /6 HTTP/1.1" 200 -
+INFO:werkzeug:2022-09-20 05:47:26,864, 172.17.0.1 - - [20/Sep/2022 05:47:26] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:root:2022-09-20 05:47:27,998, successfully connected to DB !!!
+INFO:werkzeug:2022-09-20 05:47:27,999, 172.17.0.1 - - [20/Sep/2022 05:47:27] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:2022-09-20 05:47:28,013, 172.17.0.1 - - [20/Sep/2022 05:47:28] "GET /static/css/main.css HTTP/1.1" 304 -
