@@ -2,12 +2,16 @@ import sqlite3
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
+import os
+import logging
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
 def get_db_connection():
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
+    app.config['db_connection_count'] = app.config['db_connection_count'] + 1
+    logging.info('successfully connected to DB !!!')
     return connection
 
 # Function to get a post using its ID
@@ -18,9 +22,10 @@ def get_post(post_id):
     connection.close()
     return post
 
+
 # Define the Flask application
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your secret key'
+app.config['db_connection_count'] = 0
 
 # Define the main route of the web application 
 @app.route('/')
@@ -36,13 +41,17 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     if post is None:
+      logging.error('Article does not present in DB!')
       return render_template('404.html'), 404
     else:
+      logging.info('A new article is created')
+      logging.debug('Article with title : %s retrieved!', post["title"])
       return render_template('post.html', post=post)
 
 # Define the About Us page
 @app.route('/about')
 def about():
+    logging.debug("The 'About Us' page is retrieved")
     return render_template('about.html')
 
 # Define the post creation functionality 
@@ -60,25 +69,50 @@ def create():
                          (title, content))
             connection.commit()
             connection.close()
-
+            logging.debug('New Article with title  %s created!', title)
             return redirect(url_for('index'))
 
     return render_template('create.html')
 
 
 # Define endpoint for healthy
-@app.route("/healthy")
-def healthy():
+@app.route("/healthz")
+def get_healthy():
     try:
         connection = get_db_connection()
-        connection.cursor()
         connection.execute("SELECT * FROM posts LIMIT 1")
         connection.close()
-        return {"SUCCESS": "The application is Healthy and it is up and running !!! "}
+        return {"result": "OK - healthy"}
     except Exception:
-        return {"ERROR": "The application is unhealthy, please contact administrator !!!"}, 500
+        return {"result": "ERROR - unhealthy"}, 500
+
+
+# Define endpoint for metrics
+@app.route("/metrics")
+def get_metrics():
+    connection = get_db_connection()
+    posts = connection.execute("SELECT * FROM posts").fetchall()
+    post_length = len(posts)
+    connection.close()
+    content = {"db_connection_count": app.config['db_connection_count'], "post_count": post_length}
+    return content
+
+# initialize_logger_message
+def initialize_logger_message():
+    log_level = os.getenv("LOGLEVEL", "DEBUG").upper()
+    log_level = (
+        getattr(logging, log_level)
+        if log_level in ["INFO", "DEBUG", "ERROR", ]
+        else logging.DEBUG
+    )
+
+    logging.basicConfig(
+        format='%(levelname)s:%(name)s:%(asctime)s, %(message)s',
+                level=log_level,
+    )
 
 
 # start the application on port 3111
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port='3111')
+    initialize_logger_message()
+    app.run(host='0.0.0.0', port='3111')
