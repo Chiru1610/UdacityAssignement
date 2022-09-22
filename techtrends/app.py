@@ -88,7 +88,7 @@ def get_healthy():
         return {"result": "ERROR - unhealthy"}, 500
 
 
-# Define metrics endpoint
+# Define endpoint for metrics
 @app.route("/metrics")
 def get_metrics():
     connection = get_db_connection()
@@ -98,7 +98,7 @@ def get_metrics():
     content = {"db_connection_count": app.config['db_connection_count'], "post_count": post_length}
     return content
 
-
+# initialize_logger_message
 def initialize_logger_message():
     log_level = os.getenv("LOGLEVEL", "DEBUG").upper()
     log_level = (
