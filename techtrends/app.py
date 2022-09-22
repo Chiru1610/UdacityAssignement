@@ -4,6 +4,7 @@ from flask import Flask, jsonify, json, render_template, request, url_for, redir
 from werkzeug.exceptions import abort
 import os
 import logging
+import sys
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
@@ -27,7 +28,7 @@ def get_post(post_id):
 app = Flask(__name__)
 app.config['db_connection_count'] = 0
 
-# Define the main route of the web application 
+# Define the main route of the web application
 @app.route('/')
 def index():
     connection = get_db_connection()
@@ -35,7 +36,7 @@ def index():
     connection.close()
     return render_template('index.html', posts=posts)
 
-# Define how each individual article is rendered 
+# Define how each individual article is rendered
 # If the post ID is not found a 404 page is shown
 @app.route('/<int:post_id>')
 def post(post_id):
@@ -54,7 +55,7 @@ def about():
     logging.debug("The 'About Us' page is retrieved")
     return render_template('about.html')
 
-# Define the post creation functionality 
+# Define the post creation functionality
 @app.route('/create', methods=('GET', 'POST'))
 def create():
     if request.method == 'POST':
@@ -87,7 +88,7 @@ def get_healthy():
         return {"result": "ERROR - unhealthy"}, 500
 
 
-# Define endpoint for metrics
+# Define metrics endpoint
 @app.route("/metrics")
 def get_metrics():
     connection = get_db_connection()
@@ -97,7 +98,7 @@ def get_metrics():
     content = {"db_connection_count": app.config['db_connection_count'], "post_count": post_length}
     return content
 
-# initialize_logger_message
+
 def initialize_logger_message():
     log_level = os.getenv("LOGLEVEL", "DEBUG").upper()
     log_level = (
@@ -106,9 +107,17 @@ def initialize_logger_message():
         else logging.DEBUG
     )
 
+    # Set logger to handle STDOUT and STDERR
+    stdout_handler = logging.StreamHandler(sys.stdout)
+    stderr_handler = logging.StreamHandler(sys.stderr)
+    handlers = [stderr_handler, stdout_handler]
+
+    # Create the log file and format each log
     logging.basicConfig(
         format='%(levelname)s:%(name)s:%(asctime)s, %(message)s',
-                level=log_level,
+        level=log_level,
+        datefmt='%m-%d-%Y, %H:%M:%S',
+        handlers=handlers
     )
 
 
